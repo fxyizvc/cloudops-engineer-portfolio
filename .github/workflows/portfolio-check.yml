@@ -1,0 +1,31 @@
+name: Portfolio Check
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  repository-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Show Repository Structure
+        run: |
+          pwd
+          ls -la
+          find . -type f
+
+      - name: Verify Documentation Exists
+        run: |
+          test -f README.md
+          test -f docs/DEPLOYMENT.md
+          test -f docs/AWS_SETUP.md
+          test -f docs/NETWORKING.md
+          test -f docs/TROUBLESHOOTING.md
+
+      - name: Success Message
+        run: echo "CloudOps portfolio validation passed."
